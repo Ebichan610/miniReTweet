@@ -6,7 +6,7 @@
 /*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:46:28 by ebichan           #+#    #+#             */
-/*   Updated: 2026/01/20 15:52:14 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/01/20 15:54:45 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/errno.h>
+#include <sys/time.h>
 
 #endif
