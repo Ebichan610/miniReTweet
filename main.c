@@ -6,7 +6,7 @@
 /*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:46:21 by ebichan           #+#    #+#             */
-/*   Updated: 2026/02/04 00:47:36 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/02/09 17:30:18 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,19 @@ static bool check_arg(char *str)
                 if(str[i + 2] == 't')
                 {
                     if(str[i + 3] == '\0')
-                        return(TRUE);
+                        return(true);
                     else
-                        return(FALSE);
+                        return(false);
                 }
                 else
-                    return(FALSE);
+                    return(false);
             }
             else
-                return(FALSE);
+                return(false);
         }
         i++;
     }
-    return(FALSE);
+    return(false);
 }
 
 int main(int argc, char *argv[])
@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
         print_error("Invalid argument number\n");
         return(1);
     }
-     if(check_arg(arg) == FALSE)
+     if(check_arg(arg) == false)
     {
         print_error("Invalid argument\n");
         return(1);

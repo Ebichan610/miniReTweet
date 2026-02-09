@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 15:37:58 by ebichan           #+#    #+#             */
-/*   Updated: 2026/02/04 17:24:02 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/02/09 17:30:41 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-bool struct_elems(t_elem * elem, it fd)
+static bool lex_line(t_elem *elem, int fd)
 {
     char *line;
     char **strs;
@@ -25,14 +25,21 @@ bool struct_elems(t_elem * elem, it fd)
         if(strs == NULL)
         {
             print_error("Ft_split failed\n");
-            return(FALSE);
+            return(false);
+        }
+        if(parse_line(elem, strs) == false)
+        {
+            free(strs);
+            return(false);
         }
         line = get_next_line(fd);
     }
-    return(TRUE);
+    if(env_check(elem) == false)
+        return(false);
+    return(true);
 }
 
-t_elem *parse_file(char *filename)
+t_elem *read_file(char *filename)
 {
     t_elem *elem;
     int fd;
@@ -49,7 +56,7 @@ t_elem *parse_file(char *filename)
         perror("Error\nmalloc");
         exit(errno);
     }
-    if(struct_elems(elem, fd) == FALSE)
+    if(lex_line(elem, fd) == false)
     {
         close(fd);
         free(elem);
