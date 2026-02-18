@@ -6,7 +6,7 @@
 /*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:46:21 by ebichan           #+#    #+#             */
-/*   Updated: 2026/02/09 17:30:18 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/02/18 14:02:04 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int main(int argc, char *argv[])
         print_error("Invalid argument\n");
         return(1);
     }
-    elem = parse_file(argv[1]);
-    minirt = init_minirt(elem);
+    minirt = init_minirt(argv[1]);
+    if(minirt == NULL)
+        return(1);
+    
 }
