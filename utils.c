@@ -6,31 +6,25 @@
 /*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:23:48 by ebichan           #+#    #+#             */
-/*   Updated: 2026/02/04 20:18:55 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/02/18 14:45:55 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-size_t	count_words(char const *str)
+size_t count_str(char **strs)
 {
-	size_t	word_count;
-	size_t	in_word;
+	size_t result;
 
-	word_count = 0;
-	in_word = 0;
-	while (*str)
+	result = 0;
+	if(strs == NULL)
+		return(-1);
+	while(*strs != NULL)
 	{
-		if (!in_word && !(*str == ' ' || *str == '\n'))
-		{
-			word_count++;
-			in_word = 1;
-		}
-		else if (in_word && (*str == ' ' || *str == '\n'))
-			in_word = 0;
-		str++;
+		result++;
+		*strs++;
 	}
-	return (word_count);
+	return(result);
 }
 
 int	ft_strcmp(const char *s1, const char *s2)
@@ -41,4 +35,24 @@ int	ft_strcmp(const char *s1, const char *s2)
 	while(s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
         i++;
     return((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
+
+bool check_positive_int_num(char *str)
+{
+	long	result;
+
+	result = 0;
+	if (str == NULL || *str == '\0')
+		return (false);
+	while (*str >= '0' && *str <= '9')
+	{
+		if (*str < '0' || *str > '9')
+			return (false);
+		if (result > INT_MAX / 10 || (result == INT_MAX / 10 && (*str
+					- '0') > INT_MAX % 10))
+			return (false);
+		result = result * 10 + (long)(*str - '0');
+		str++;
+	}
+	return (true);
 }
