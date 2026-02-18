@@ -6,7 +6,7 @@
 /*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 15:37:58 by ebichan           #+#    #+#             */
-/*   Updated: 2026/02/09 17:30:41 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/02/18 16:11:59 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,13 @@ static bool lex_line(t_elem *elem, int fd)
         }
         if(parse_line(elem, strs) == false)
         {
-            free(strs);
+            free_strs(strs);
             return(false);
         }
+        free_strs(strs);
         line = get_next_line(fd);
     }
-    if(env_check(elem) == false)
-        return(false);
-    return(true);
+    return(env_check(elem));
 }
 
 t_elem *read_file(char *filename)
@@ -48,20 +47,21 @@ t_elem *read_file(char *filename)
     if(fd < 0)
     {
         perror("Error\nopen");
-        exit(errno);
+        return(NULL);
     }
     elem = (t_elem *)malloc(sizeof(t_elem));
     if(elem == NULL)
     {
         perror("Error\nmalloc");
-        exit(errno);
+        return(NULL);
     }
+    ft_bzero(elem, sizeof(t_elem));
     if(lex_line(elem, fd) == false)
     {
         close(fd);
-        free(elem);
+        free_elem(elem);
         print_error("Invalid file content\n");
-        exit(errno);
+        return(NULL);
     }
     close(fd);
     return(elem);
