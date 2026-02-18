@@ -6,7 +6,7 @@
 /*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 17:09:37 by ebichan           #+#    #+#             */
-/*   Updated: 2026/02/09 17:29:59 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/02/18 15:45:36 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static double calc_integer_part(const char **nptr)
 
     result = 0;
     if(**nptr < '0' || **nptr > '9')
-        return(INFINITY);
+        return(NaN);
     while(**nptr >= '0' && **nptr <= '9')
     {
         result = result * 10 + **nptr - '0';
@@ -84,7 +84,7 @@ static double calc_exponent_part(const char **nptr, double num)
         (*nptr)++;
     }
     if(**nptr < '0' || **nptr > '9')
-        return(INFINITY);
+        return(NaN);
     while(**nptr >= '0' && **nptr <= '9')
     {
         e = e * 10 + (**nptr - '0');
@@ -108,17 +108,17 @@ double ft_atof(const char *nptr)
             type = -1;
     }
     result = calc_integer_part(&nptr);
-    if(result == INFINITY)
-        return(INFINITY);
+    if(isinf(result) || isnan(result))
+        return(NaN);
     if(*nptr == '.')
-    {
         result += calc_decimal_part(&nptr);
-        if(result == INFINITY)
-            return(INFINITY);
-    }
+    if(isinf(result) || isnan(result))
+        return(NaN);
     if(*nptr == 'e' || *nptr == 'E')
         result = calc_exponent_part(&nptr, result);
+    if(isinf(result) || isnan(result))
+        return(NaN);
     if(*nptr != '\0')
-        return(INFINITY);
+        return(NaN);
     return(result * type);
 }
