@@ -6,7 +6,7 @@
 /*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 01:52:21 by ebichan           #+#    #+#             */
-/*   Updated: 2026/02/18 16:07:10 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/02/24 16:13:36 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,22 @@ void free_strs(char **strs)
     free(strs);
 }
 
-void free_all(t_minirt *minirt)
+int free_all(t_minirt *minirt)
 {
-
+    if(minirt == NULL)
+        return;
+    if(minirt->img_ptr != NULL)
+        mlx_destroy_image(minirt->mlx_ptr, minirt->img_ptr);
+    if(minirt->win_ptr != NULL)
+        mlx_destroy_window(minirt->mlx_ptr, minirt->win_ptr);
+    if(minirt->mlx_ptr != NULL)
+    {
+        // mlx_destroy_display(minirt->mlx_ptr);//Linux
+        free(minirt->mlx_ptr);
+    }
+    if(minirt->elem != NULL)
+        free_elem(minirt->elem);
+    free(minirt);
+    exit(0);
+    return(0);
 }
