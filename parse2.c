@@ -6,7 +6,7 @@
 /*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 01:47:53 by ebichan           #+#    #+#             */
-/*   Updated: 2026/02/24 14:28:35 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/02/24 16:44:57 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ bool parse_plane(t_elem *elem, char **strs)
     if(isnan(point.x) || isnan(point.y) || isnan(point.z))
         return(false);
     vector = apply_vector(strs[2]);
-    if(isnan(vector.vx) || isnan(vector.vy) || isnan(vector.vz))
+    if(isnan(vector.vx) || isnan(vector.vy) || isnan(vector.vz) || is_zero_vector(vector))
         return(false);
     color = apply_color(strs[3]);
     if(color.r == -1 || color.g == -1 || color.b == -1)
@@ -95,7 +95,7 @@ bool parse_cylinder(t_elem *elem, char **strs)
     if(isnan(point.x) || isnan(point.y) || isnan(point.z))
         return(false);
     vector = apply_vector(strs[2]);
-    if(isnan(vector.vx) || isnan(vector.vy) || isnan(vector.vz))
+    if(isnan(vector.vx) || isnan(vector.vy) || isnan(vector.vz) || is_zero_vector(vector))
         return(false);
     if(!in_double_range(strs[3], DOUBLE_POSITIVE) || !in_double_range(strs[4], DOUBLE_POSITIVE))
         return(false);

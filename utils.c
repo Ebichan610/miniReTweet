@@ -6,7 +6,7 @@
 /*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:23:48 by ebichan           #+#    #+#             */
-/*   Updated: 2026/02/18 14:45:55 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/02/24 16:42:50 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,11 @@ bool check_positive_int_num(char *str)
 		str++;
 	}
 	return (true);
+}
+
+bool is_zero_vector(t_vector vector)
+{
+	if(vector.vx == 0 && vector.vy == 0 && vector.vz == 0)
+		return(true);
+	return(false);
 }

@@ -6,7 +6,7 @@
 /*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 01:43:56 by ebichan           #+#    #+#             */
-/*   Updated: 2026/02/18 16:08:04 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/02/24 16:31:09 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_vector apply_vector(char *str)
     vector.vy = ft_atof(strs[1]);
     vector.vz = ft_atof(strs[2]);
     free_strs(strs);
-    return
+    return(vector);
 }
 
 t_color apply_color(char *str)

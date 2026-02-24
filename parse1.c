@@ -6,7 +6,7 @@
 /*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 01:48:01 by ebichan           #+#    #+#             */
-/*   Updated: 2026/02/24 14:28:34 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/02/24 16:43:18 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ bool parse_camera(t_elem *elem, char **strs)
     if(isnan(point.x) || isnan(point.y) || isnan(point.z))
         return(false);
     vector = apply_vector(strs[2]);
-    if(isnan(vector.vx) || isnan(vector.vy) || isnan(vector.vz))
+    if(isnan(vector.vx) || isnan(vector.vy) || isnan(vector.vz) || is_zero_vector(vector))
         return(false);
     if(!in_degree_range(strs[3]))
         return(false);

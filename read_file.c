@@ -6,7 +6,7 @@
 /*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 15:37:58 by ebichan           #+#    #+#             */
-/*   Updated: 2026/02/24 14:52:26 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/02/24 16:32:38 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static bool parse_line(t_elem *elem, char **strs)
 {
+    if(strs == NULL || strs[0] == NULL)
+        return(true);
     if(ft_strcmp(strs[0], "A") == 0 && elem->amb_flag == false)
         return(parse_amb(elem, strs));
     else if(ft_strcmp(strs[0], "C") == 0 && elem->camera_flag == false)
