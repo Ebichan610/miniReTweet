@@ -6,17 +6,17 @@
 /*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 01:48:01 by ebichan           #+#    #+#             */
-/*   Updated: 2026/02/18 16:26:04 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/02/24 14:28:34 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static bool parse_amb(t_elem *elem, char **strs)
+bool parse_amb(t_elem *elem, char **strs)
 {
     double ratio;
     t_color color;
-    t_amb *amb;
+    t_amb *new_node;
 
     if(count_str(strs) != 3)
         return(false);
@@ -26,22 +26,22 @@ static bool parse_amb(t_elem *elem, char **strs)
     color = apply_color(strs[2]);
     if(color.r == -1 || color.g == -1 || color.b == -1)
         return(false);
-    amb = (t_amb *)malloc(sizeof(t_amb));
-    if(amb == NULL)
+    new_node = (t_amb *)malloc(sizeof(t_amb));
+    if(new_node == NULL)
         return(false);
-    amb->ratio = ratio;
-    amb->color = color;
-    elem->amb = amb;
+    new_node->ratio = ratio;
+    new_node->color = color;
+    elem->amb = new_node;
     elem->amb_flag = true;
     return(true);
 }
 
-static bool parse_camera(t_elem *elem, char **strs)
+bool parse_camera(t_elem *elem, char **strs)
 {
     t_point point;
     t_vector vector;
     double   fov;
-    t_camera *camera;
+    t_camera *new_node;
 
     if(count_str(strs) != 4)
         return(false);
@@ -54,23 +54,23 @@ static bool parse_camera(t_elem *elem, char **strs)
     if(!in_degree_range(strs[3]))
         return(false);
     fov = ft_atof(strs[3]);
-    camera = (t_camera *)malloc(sizeof(camera));
-    if(camera == NULL)
+    new_node = (t_camera *)malloc(sizeof(camera));
+    if(new_node == NULL)
         return(false);
-    camera->point = point;
-    camera->vector = vector;
-    camera->fov = fov;
-    elem->camera = camera;
+    new_node->point = point;
+    new_node->vector = vector;
+    new_node->fov = fov;
+    elem->camera = new_node;
     elem->camera_flag = true;
     return(true);
 }
 
-static bool parse_light(t_elem *elem, char **strs)
+bool parse_light(t_elem *elem, char **strs)
 {
     t_point point;
     double ratio;
     t_color color;
-    t_light *light;
+    t_light *new_node;
     
     if(count_str(strs) != 4)
         return(false);
@@ -83,30 +83,57 @@ static bool parse_light(t_elem *elem, char **strs)
     color = apply_color(strs[3]);
     if(color.r == -1 || color.g == -1 || color.b == -1)
         return(false);
-    light = (t_light *)malloc(sizeof(t_light));
-    if(light == NULL)
+    new_node = (t_light *)malloc(sizeof(t_light));
+    if(new_node == NULL)
         return(false);
-    light->point = point;
-    light->ratio = ratio;
-    light->color = color;
-    elem->light = light;
+    new_node->point = point;
+    new_node->ratio = ratio;
+    new_node->color = color;
+    elem->light = new_node;
     elem->light_flag = true;
     return(true);
 }
 
-bool parse_line(t_elem *elem, char **strs)
+static bool set_sphere(t_elem *elem, t_point point, double r, t_color color)
 {
-    if(ft_strcmp(strs[0], "A") == 0 && elem->amb_flag == false)
-        return(parse_amb(elem, strs));
-    else if(ft_strcmp(strs[0], "C") == 0 && elem->camera_flag == false)
-        return(parse_camera(elem, strs));
-    else if(ft_strcmp(strs[0], "L") == 0 && elem->light_flag == false)
-        return(parse_light(elem, strs));
-    else if(ft_strcmp(strs[0], "sp") == 0)
-        return(parse_sphere(elem, strs));
-    else if(ft_strcmp(strs[0], "pl") == 0)
-        return(parse_plane(elem, strs));
-    else if(ft_strcmp(strs[0], "cy") == 0)
-        return(parse_cylinder(elem, strs));
-    return(false);
+    t_sphere *new_node;
+    t_sphere *last;
+
+    new_node = (t_sphere *)malloc(sizeof(t_sphere));
+    if(new_node == NULL)
+        return(false);
+    new_node->point = point;
+    new_node->r = r;
+    new_node->color = color;
+    new_node->next = NULL;
+    if(elem->sphere == NULL)
+        elem->sphere = new_node;
+    else
+    {
+        last = elem->sphere;
+        while(last->next != NULL)
+            last = last->next;
+        last->next = new_node;
+    }
+    return(true);
+}
+
+bool parse_sphere(t_elem *elem, char **strs)
+{
+    t_point point;
+    double r;
+    t_color color;
+    
+    if(count_str(strs) != 4)
+        return(false);
+    point = apply_point(strs[1]);
+    if(isnan(point.x) || isnan(point.y) || isnan(point.z))
+        return(false);
+    if(!in_double_range(strs[2], DOUBLE_POSITIVE))
+        return(false);
+    r = ft_atof(strs[2]);
+    color = apply_color(strs[3]);
+    if(color.r == -1 || color.g == -1 || color.b == -1)
+        return(false);
+    return(set_sphere(elem, point, r, color));
 }
