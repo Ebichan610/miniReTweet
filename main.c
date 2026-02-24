@@ -6,7 +6,7 @@
 /*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:46:21 by ebichan           #+#    #+#             */
-/*   Updated: 2026/02/18 14:02:04 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/02/24 15:51:09 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,11 @@ static bool check_arg(char *str)
 
     i = 0;
     while(str[i] != '\0')
-    {
-        if(str[i] == '.')
-        {
-            if(str[i + 1] == 'r')
-            {
-                if(str[i + 2] == 't')
-                {
-                    if(str[i + 3] == '\0')
-                        return(true);
-                    else
-                        return(false);
-                }
-                else
-                    return(false);
-            }
-            else
-                return(false);
-        }
         i++;
-    }
+    if(i < 3)
+        return(false);
+    if(str[i - 3] == '.' && str[i - 2] == 'r' && str[i - 1] == 't')
+        return(true);
     return(false);
 }
 
@@ -59,5 +44,9 @@ int main(int argc, char *argv[])
     minirt = init_minirt(argv[1]);
     if(minirt == NULL)
         return(1);
-    
+    //RayTracing
+    mlx_put_image_to_window(minirt->mlx_ptr, minirt->win_ptr, minirt-<img_ptr, 0, 0);
+    setup_hooks(minirt);
+    mlx_loop(minirt->mlx_ptr);
+    return(0);
 }

@@ -6,7 +6,7 @@
 /*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:46:28 by ebichan           #+#    #+#             */
-/*   Updated: 2026/02/18 16:29:59 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/02/24 16:09:27 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
+
+#define KEY_ESC 53
+#define EVENT_DESTROY_NOTIFY 17
 
 typedef enum
 {
@@ -54,6 +57,12 @@ typedef struct s_color
     double g;
     double b;
 }   t_color;
+
+typedef struct s_cylen
+{
+    double r;
+    double h;
+}   t_cylen;
 
 typedef struct s_amb
 {
@@ -95,10 +104,10 @@ typedef struct s_cylinder
 {
     t_point point;
     t_vector vector;
-    double   r;
-    double   h;
+    double r;
+    double h;
     t_color color;
-    t_cylinder *cylinder;
+    t_cylinder *next;
 }   t_cylinder;
 
 typedef struct s_elem
@@ -116,6 +125,13 @@ typedef struct s_elem
 
 typedef struct s_minirt
 {
+    void *mlx_ptr;
+    void *win_ptr;
+    void *img_ptr;
+    char *addr;
+    int bits_per_pixel;
+    int size_line;
+    int endian;
     t_elem *elem;
 }   t_minirt;
 
