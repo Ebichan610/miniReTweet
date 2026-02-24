@@ -6,11 +6,28 @@
 /*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 15:37:46 by ebichan           #+#    #+#             */
-/*   Updated: 2026/02/18 14:06:11 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/02/24 16:14:54 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+static bool init_mlx(t_minirt *minirt)
+{
+    minirt->mlx_ptr = init_mlx();
+    if(minirt->mlx_ptr == NULL)
+        return(false);
+    minirt->win_ptr = mlx_new_window(minirt->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "miniRT");
+    if(minirt->win_ptr == NULL)
+        return(false);
+    minirt->img_ptr = mlx_new_image(minirt->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+    if(minirt->img_ptr == NULL)
+        return(false);
+    minirt->addr = mlx_get_data_addr(minirt->img_ptr, &minirt->bits_per_pixel, &minirt->size_line, &minirt->endian);
+    if(minirt->addr = NULL)
+        return(false);
+    return(true);
+}
 
 t_minirt *init_minirt(char *filename)
 {
@@ -26,7 +43,12 @@ t_minirt *init_minirt(char *filename)
     minirt->elem = read_file(filename);
     if(minirt->elem == NULL)
     {
-        free_all(minirt);
+        (void)free_all(minirt);
+        return(NULL);
+    }
+    if(init_mlx(minirt) == false)
+    {
+        (void)free_all(minirt);
         return(NULL);
     }
 }
