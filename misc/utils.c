@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yebi <yebi@student.42tokyo.jp>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:23:48 by ebichan           #+#    #+#             */
-/*   Updated: 2026/02/24 16:42:50 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/03/30 13:29:25 by yebi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-size_t count_str(char **strs)
+size_t	count_str(char **strs)
 {
-	size_t result;
+	size_t	result;
 
 	result = 0;
-	if(strs == NULL)
-		return(-1);
-	while(*strs != NULL)
+	if (strs == NULL)
+		return (-1);
+	while (*strs != NULL)
 	{
 		result++;
 		*strs++;
 	}
-	return(result);
+	return (result);
 }
 
 int	ft_strcmp(const char *s1, const char *s2)
@@ -32,12 +32,12 @@ int	ft_strcmp(const char *s1, const char *s2)
 	size_t	i;
 
 	i = 0;
-	while(s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
-        i++;
-    return((unsigned char)s1[i] - (unsigned char)s2[i]);
+	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
-bool check_positive_int_num(char *str)
+bool	check_positive_int_num(char *str)
 {
 	long	result;
 
@@ -57,9 +57,9 @@ bool check_positive_int_num(char *str)
 	return (true);
 }
 
-bool is_zero_vector(t_vector vector)
+bool	is_zero_vector(t_vector vector)
 {
-	if(vector.vx == 0 && vector.vy == 0 && vector.vz == 0)
-		return(true);
-	return(false);
+	if (vector.vx == 0 && vector.vy == 0 && vector.vz == 0)
+		return (true);
+	return (false);
 }
