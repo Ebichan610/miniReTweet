@@ -6,15 +6,15 @@
 #    By: yebi <yebi@student.42tokyo.jp>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/20 15:07:09 by ebichan           #+#    #+#              #
-#    Updated: 2026/04/13 18:32:41 by yebi             ###   ########.fr        #
+#    Updated: 2026/04/13 18:37:19 by yebi             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
 
-MLX_FLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit -lm
-# MLX_FLAGS = -L$(MLX_DIR) -lmlx　-lXext -lX11 -lm
+# MLX_FLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit -lm
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
 INCLUDES    = -I. -Ilibft -Iminilibx
 
