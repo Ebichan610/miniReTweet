@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split_space.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yebi <yebi@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/13 19:07:08 by yebi              #+#    #+#             */
+/*   Updated: 2026/04/13 19:07:09 by yebi             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 static size_t	count_words(char const *str)
@@ -85,8 +97,8 @@ char	**ft_split_space(char const *s)
 	char	**result;
 	size_t	word_count;
 
-	if(s == NULL)
-		return(NULL);
+	if (s == NULL)
+		return (NULL);
 	word_count = count_words(s);
 	result = (char **)malloc(sizeof(char *) * (word_count + 1));
 	if (result == NULL)
