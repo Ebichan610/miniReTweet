@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yebi <yebi@student.42tokyo.jp>             +#+  +:+       +#+         #
+#    By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/20 15:07:09 by ebichan           #+#    #+#              #
-#    Updated: 2026/03/30 13:31:09 by yebi             ###   ########.fr        #
+#    Updated: 2026/04/13 13:09:30 by ebichan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,31 @@ MLX         = $(MLX_DIR)/libmlx.a
 
 NAME = miniRT
 
-SRCS = 
-
+SRCS =	misc/error.c\
+	misc/free_elem.c\
+	misc/free.c\
+	misc/ft_atof.c\
+	misc/ft_split_space.c\
+	misc/utils.c\
+	parse/apply.c\
+	parse/get_next_line.c\
+	parse/in_range.c\
+	parse/parse1.c\
+	parse/parse2.c\
+	parse/read_file.c\
+	raytracing/color_calc.c\
+	raytracing/drawing_picture.c\
+	raytracing/lighting.c\
+	raytracing/ray.c\
+	raytracing/shadow.c\
+	raytracing/vec_calc.c\
+	raytracing/hit_object/hit_cylinder.c\
+	raytracing/hit_object/hit_plane.c\
+	raytracing/hit_object/hit_sphere.c\
+	init.c\
+	main.c\
+	mlx_hook.c
+		
 OBJS = $(SRCS:%.c=%.o)
 
 all: $(NAME)

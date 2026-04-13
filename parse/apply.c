@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   apply.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yebi <yebi@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 01:43:56 by ebichan           #+#    #+#             */
-/*   Updated: 2026/03/30 13:29:29 by yebi             ###   ########.fr       */
+/*   Updated: 2026/04/13 01:37:46 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ t_point	apply_point(char *str)
 	t_point	point;
 	char	**strs;
 
-	point.x = NaN;
-	point.y = NaN;
-	point.z = NaN;
+	point.x = NAN;
+	point.y = NAN;
+	point.z = NAN;
 	strs = ft_split(str, ',');
 	if (strs == NULL)
 		return (point);
@@ -28,8 +28,8 @@ t_point	apply_point(char *str)
 		free_strs(strs);
 		return (point);
 	}
-	if (!in_double_range(strs[0], DOUBLE_ALL) || !in_double_range(strs[0],
-			DOUBLE_ALL) || !in_double_range(strs[0], DOUBLE_ALL))
+	if (!in_double_range(strs[0], DOUBLE_ALL) || !in_double_range(strs[1],
+			DOUBLE_ALL) || !in_double_range(strs[2], DOUBLE_ALL))
 	{
 		free_strs(strs);
 		return (point);
@@ -46,9 +46,9 @@ t_vector	apply_vector(char *str)
 	t_vector	vector;
 	char		**strs;
 
-	vector.vx = NaN;
-	vector.vy = NaN;
-	vector.vz = NaN;
+	vector.vx = NAN;
+	vector.vy = NAN;
+	vector.vz = NAN;
 	strs = ft_split(str, ',');
 	if (strs == NULL)
 		return (vector);
@@ -57,8 +57,8 @@ t_vector	apply_vector(char *str)
 		free_strs(strs);
 		return (vector);
 	}
-	if (!in_vector_range(strs[0]) || !in_vector_range(strs[0])
-		|| !in_vector_range(strs[0]))
+	if (!in_vector_range(strs[0]) || !in_vector_range(strs[1])
+		|| !in_vector_range(strs[2]))
 	{
 		free_strs(strs);
 		return (vector);
@@ -92,9 +92,9 @@ t_color	apply_color(char *str)
 		free_strs(strs);
 		return (color);
 	}
-	color.r = (double)ft_atoi(strs[0]);
-	color.g = (double)ft_atoi(strs[1]);
-	color.b = (double)ft_atoi(strs[2]);
+	color.r = (double)ft_atoi(strs[0]) / 255.0;
+	color.g = (double)ft_atoi(strs[1]) / 255.0;
+	color.b = (double)ft_atoi(strs[2]) / 255.0;
 	free_strs(strs);
 	return (color);
 }

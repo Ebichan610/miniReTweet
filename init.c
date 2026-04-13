@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yebi <yebi@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 15:37:46 by ebichan           #+#    #+#             */
-/*   Updated: 2026/03/30 13:31:03 by yebi             ###   ########.fr       */
+/*   Updated: 2026/04/13 01:13:30 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static bool	init_mlx(t_minirt *minirt)
 {
-	minirt->mlx_ptr = init_mlx();
+	minirt->mlx_ptr = mlx_init();
 	if (minirt->mlx_ptr == NULL)
 		return (false);
 	minirt->win_ptr = mlx_new_window(minirt->mlx_ptr, WIN_WIDTH, WIN_HEIGHT,
@@ -26,7 +26,7 @@ static bool	init_mlx(t_minirt *minirt)
 		return (false);
 	minirt->addr = mlx_get_data_addr(minirt->img_ptr, &minirt->bits_per_pixel,
 			&minirt->size_line, &minirt->endian);
-	if (minirt->addr = NULL)
+	if (minirt->addr == NULL)
 		return (false);
 	return (true);
 }
@@ -53,4 +53,5 @@ t_minirt	*init_minirt(char *filename)
 		(void)free_all(minirt);
 		return (NULL);
 	}
+	return(minirt);
 }

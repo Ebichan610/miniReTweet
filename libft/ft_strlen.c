@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yebi <yebi@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 23:54:15 by yebi              #+#    #+#             */
-/*   Updated: 2024/11/30 23:10:22 by yebi             ###   ########.fr       */
+/*   Updated: 2026/04/13 01:44:11 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlen(const char *s)
 	size_t	len;
 
 	len = 0;
+	if(s == NULL)
+		return(0);
 	while (*s)
 	{
 		len++;

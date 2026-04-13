@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yebi <yebi@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 17:09:37 by ebichan           #+#    #+#             */
-/*   Updated: 2026/03/30 13:29:16 by yebi             ###   ########.fr       */
+/*   Updated: 2026/04/13 00:59:34 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static double	calc_integer_part(const char **nptr)
 
 	result = 0;
 	if (**nptr < '0' || **nptr > '9')
-		return (NaN);
+		return (NAN);
 	while (**nptr >= '0' && **nptr <= '9')
 	{
 		result = result * 10 + **nptr - '0';
@@ -64,7 +64,7 @@ static bool	is_overflow_or_underflow(double num, long e)
 	{
 		scaled = fabs(num) * pow(10.0, (double)e);
 		if (scaled < DBL_TRUE_MIN)
-			return (TRUE);
+			return (true);
 	}
 	return (false);
 }
@@ -84,13 +84,13 @@ static double	calc_exponent_part(const char **nptr, double num)
 		(*nptr)++;
 	}
 	if (**nptr < '0' || **nptr > '9')
-		return (NaN);
+		return (NAN);
 	while (**nptr >= '0' && **nptr <= '9')
 	{
 		e = e * 10 + (**nptr - '0');
 		(*nptr)++;
 	}
-	if (is_overflow_or_underflow(num, e * etype) == TRUE)
+	if (is_overflow_or_underflow(num, e * etype) == true)
 		return (INFINITY);
 	return (num * pow(10, e * etype));
 }
@@ -109,16 +109,16 @@ double	ft_atof(const char *nptr)
 	}
 	result = calc_integer_part(&nptr);
 	if (isinf(result) || isnan(result))
-		return (NaN);
+		return (NAN);
 	if (*nptr == '.')
 		result += calc_decimal_part(&nptr);
 	if (isinf(result) || isnan(result))
-		return (NaN);
+		return (NAN);
 	if (*nptr == 'e' || *nptr == 'E')
 		result = calc_exponent_part(&nptr, result);
 	if (isinf(result) || isnan(result))
-		return (NaN);
+		return (NAN);
 	if (*nptr != '\0')
-		return (NaN);
+		return (NAN);
 	return (result * type);
 }

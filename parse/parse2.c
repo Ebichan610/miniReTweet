@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yebi <yebi@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 01:47:53 by ebichan           #+#    #+#             */
-/*   Updated: 2026/03/30 13:29:42 by yebi             ###   ########.fr       */
+/*   Updated: 2026/04/13 01:38:51 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ bool	parse_cylinder(t_elem *elem, char **strs)
 	if (!in_double_range(strs[3], DOUBLE_POSITIVE) || !in_double_range(strs[4],
 			DOUBLE_POSITIVE))
 		return (false);
-	len.r = ft_atof(strs[3]);
+	len.r = ft_atof(strs[3]) / 2.0;
 	len.h = ft_atof(strs[4]);
 	color = apply_color(strs[5]);
 	if (color.r == -1 || color.g == -1 || color.b == -1)

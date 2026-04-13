@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yebi <yebi@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 01:48:01 by ebichan           #+#    #+#             */
-/*   Updated: 2026/03/30 13:29:39 by yebi             ###   ########.fr       */
+/*   Updated: 2026/04/13 01:38:37 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ bool	parse_camera(t_elem *elem, char **strs)
 	if (!in_degree_range(strs[3]))
 		return (false);
 	fov = ft_atof(strs[3]);
-	new_node = (t_camera *)malloc(sizeof(camera));
+	new_node = (t_camera *)malloc(sizeof(t_camera));
 	if (new_node == NULL)
 		return (false);
 	new_node->point = point;
@@ -132,7 +132,7 @@ bool	parse_sphere(t_elem *elem, char **strs)
 		return (false);
 	if (!in_double_range(strs[2], DOUBLE_POSITIVE))
 		return (false);
-	r = ft_atof(strs[2]);
+	r = ft_atof(strs[2]) / 2.0;
 	color = apply_color(strs[3]);
 	if (color.r == -1 || color.g == -1 || color.b == -1)
 		return (false);

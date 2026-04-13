@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yebi <yebi@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:23:48 by ebichan           #+#    #+#             */
-/*   Updated: 2026/03/30 13:29:25 by yebi             ###   ########.fr       */
+/*   Updated: 2026/04/13 00:57:42 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ size_t	count_str(char **strs)
 	while (*strs != NULL)
 	{
 		result++;
-		*strs++;
+		strs++;
 	}
 	return (result);
 }
