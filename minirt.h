@@ -6,7 +6,7 @@
 /*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:46:28 by ebichan           #+#    #+#             */
-/*   Updated: 2026/04/13 02:02:57 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/04/13 14:35:19 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <string.h>
 # include <sys/errno.h>
 # include <sys/time.h>
+# include <X11/keysym.h>
+# include <X11/X.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -30,9 +32,6 @@
 
 # define WIN_WIDTH 800
 # define WIN_HEIGHT 600
-// #define KEY_ESC 65307//Linux
-# define KEY_ESC 53
-# define EVENT_DESTROY_NOTIFY 17
 
 typedef enum
 {

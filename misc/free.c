@@ -6,7 +6,7 @@
 /*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 01:52:21 by ebichan           #+#    #+#             */
-/*   Updated: 2026/04/13 00:55:21 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/04/13 14:36:09 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ int	free_all(t_minirt *minirt)
 	if (minirt->elem != NULL)
 		free_elem(minirt->elem);
 	free(minirt);
-	exit(0);
+	exit(EXIT_SUCCESS);
 	return (0);
 }

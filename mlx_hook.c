@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yebi <yebi@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 16:05:33 by ebichan           #+#    #+#             */
-/*   Updated: 2026/03/30 13:31:12 by yebi             ###   ########.fr       */
+/*   Updated: 2026/04/13 14:38:44 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	key_hook(int keycode, t_minirt *minirt)
 {
-	if (keycode == KEY_ESC)
+	if (keycode == XK_Escape)
 		free_all(minirt);
 	return (0);
 }
@@ -22,5 +22,5 @@ static int	key_hook(int keycode, t_minirt *minirt)
 void	setup_hooks(t_minirt *minirt)
 {
 	mlx_key_hook(minirt->win_ptr, key_hook, minirt);
-	mlx_hook(minirt->win_ptr, EVENT_DESTROY_NOTIFY, 0, free_all, minirt);
+	mlx_hook(minirt->win_ptr, DestroyNotify, KeyPressMask, free_all, minirt);
 }
