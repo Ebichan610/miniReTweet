@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yebi <yebi@student.42tokyo.jp>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 01:52:21 by ebichan           #+#    #+#             */
-/*   Updated: 2026/04/13 14:36:09 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/04/13 18:29:54 by yebi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	free_strs(char **strs)
 
 	i = 0;
 	if (strs == NULL)
-		return;
+		return ;
 	while (strs[i] != NULL)
 	{
 		free(strs[i]);
@@ -30,7 +30,7 @@ void	free_strs(char **strs)
 int	free_all(t_minirt *minirt)
 {
 	if (minirt == NULL)
-		return(0) ;
+		return (0);
 	if (minirt->img_ptr != NULL)
 		mlx_destroy_image(minirt->mlx_ptr, minirt->img_ptr);
 	if (minirt->win_ptr != NULL)

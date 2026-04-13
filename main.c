@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yebi <yebi@student.42tokyo.jp>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:46:21 by ebichan           #+#    #+#             */
-/*   Updated: 2026/04/13 01:18:55 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/04/13 18:32:38 by yebi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int	main(int argc, char *argv[])
 	if (minirt == NULL)
 		return (1);
 	drawing_picture(minirt);
-	mlx_put_image_to_window(minirt->mlx_ptr, minirt->win_ptr, minirt
-		-> img_ptr, 0, 0);
+	mlx_put_image_to_window(minirt->mlx_ptr, minirt->win_ptr, minirt->img_ptr,
+		0, 0);
 	setup_hooks(minirt);
 	mlx_loop(minirt->mlx_ptr);
 	return (0);

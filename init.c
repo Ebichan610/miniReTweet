@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yebi <yebi@student.42tokyo.jp>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 15:37:46 by ebichan           #+#    #+#             */
-/*   Updated: 2026/04/13 01:13:30 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/04/13 18:32:34 by yebi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,5 @@ t_minirt	*init_minirt(char *filename)
 		(void)free_all(minirt);
 		return (NULL);
 	}
-	return(minirt);
+	return (minirt);
 }
