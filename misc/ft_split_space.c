@@ -6,7 +6,7 @@
 /*   By: yebi <yebi@student.42tokyo.jp>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 19:07:08 by yebi              #+#    #+#             */
-/*   Updated: 2026/04/13 19:07:09 by yebi             ###   ########.fr       */
+/*   Updated: 2026/04/13 19:08:42 by yebi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static char	**words_split(char **result, char const *s, size_t word_count)
 	return (result);
 }
 
-char	**ft_split_space(char const *s)
+char	**ft_split_space(char *s)
 {
 	char	**result;
 	size_t	word_count;
