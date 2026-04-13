@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yebi <yebi@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:46:28 by ebichan           #+#    #+#             */
-/*   Updated: 2026/04/13 18:32:45 by yebi             ###   ########.fr       */
+/*   Updated: 2026/04/13 19:05:22 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ double					ft_atof(const char *nptr);
 char					**ft_split_space(char *str);
 size_t					count_str(char **strs);
 int						ft_strcmp(const char *s1, const char *s2);
+bool					ft_isspace(char c);
 bool					check_positive_int_num(char *str);
 bool					is_zero_vector(t_vector vector);
 t_point					apply_point(char *str);

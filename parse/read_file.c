@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yebi <yebi@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 15:37:58 by ebichan           #+#    #+#             */
-/*   Updated: 2026/04/13 18:30:58 by yebi             ###   ########.fr       */
+/*   Updated: 2026/04/13 18:58:35 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,6 @@ static bool	parse_line(t_elem *elem, char **strs)
 	return (false);
 }
 
-static void	remove_newline(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i] && line[i] != '\n')
-		i++;
-	line[i] = '\0';
-}
-
 static bool	lex_line(t_elem *elem, int fd)
 {
 	char	*line;
@@ -49,7 +39,6 @@ static bool	lex_line(t_elem *elem, int fd)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		remove_newline(line);
 		strs = ft_split_space(line);
 		free(line);
 		if (strs == NULL)

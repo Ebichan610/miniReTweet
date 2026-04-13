@@ -1,91 +1,95 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_split_space.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yebi <yebi@student.42tokyo.jp>             +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/13 01:49:49 by ebichan           #+#    #+#             */
-/*   Updated: 2026/04/13 18:30:36 by yebi             ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minirt.h"
 
-static bool	is_whitespace(char c)
+static size_t	count_words(char const *str)
 {
-	return (c == ' ' || c == '\t');
-}
+	size_t	word_count;
+	size_t	in_word;
 
-static int	count_words(char *str)
-{
-	int		count;
-	bool	in_word;
-
-	count = 0;
-	in_word = false;
+	word_count = 0;
+	in_word = 0;
 	while (*str)
 	{
-		if (!is_whitespace(*str) && !in_word)
+		if (!in_word && !ft_isspace(*str))
 		{
-			in_word = true;
-			count++;
+			word_count++;
+			in_word = 1;
 		}
-		else if (is_whitespace(*str))
-			in_word = false;
+		else if (in_word && ft_isspace(*str))
+			in_word = 0;
 		str++;
 	}
-	return (count);
+	return (word_count);
 }
 
-static char	*get_word(char **str)
+static char	*strndup_split(char const *s, size_t n)
 {
-	char	*start;
 	char	*word;
-	int		len;
+	size_t	i;
 
-	while (**str && is_whitespace(**str))
-		(*str)++;
-	start = *str;
-	len = 0;
-	while (**str && !is_whitespace(**str))
-	{
-		(*str)++;
-		len++;
-	}
-	if (len == 0)
-		return (NULL);
-	word = (char *)malloc(sizeof(char) * (len + 1));
+	word = (char *)malloc(sizeof(char) * (n + 1));
 	if (word == NULL)
 		return (NULL);
-	ft_memcpy(word, start, len);
-	word[len] = '\0';
+	i = 0;
+	while (i < n)
+	{
+		word[i] = s[i];
+		i++;
+	}
+	word[i] = '\0';
 	return (word);
 }
 
-char	**ft_split_space(char *str)
+static void	free_split(char **result, int i_max)
 {
-	char	**result;
-	int		count;
-	int		i;
+	int	i;
 
-	if (str == NULL)
-		return (NULL);
-	count = count_words(str);
-	result = (char **)malloc(sizeof(char *) * (count + 1));
-	if (result == NULL)
-		return (NULL);
 	i = 0;
-	while (i < count)
+	while (i < i_max)
 	{
-		result[i] = get_word(&str);
+		free(result[i]);
+		i++;
+	}
+	free(result);
+}
+
+static char	**words_split(char **result, char const *s, size_t word_count)
+{
+	size_t	i;
+	size_t	n;
+
+	i = 0;
+	while (i < word_count)
+	{
+		n = 0;
+		while (ft_isspace(*s) && *s)
+			s++;
+		while (!ft_isspace(*s) && *s)
+		{
+			n++;
+			s++;
+		}
+		result[i] = strndup_split(s - n, n);
 		if (result[i] == NULL)
 		{
-			free_strs(result);
+			free_split(result, (int)i);
 			return (NULL);
 		}
 		i++;
 	}
-	result[count] = NULL;
+	result[i] = NULL;
 	return (result);
+}
+
+char	**ft_split_space(char const *s)
+{
+	char	**result;
+	size_t	word_count;
+
+	if(s == NULL)
+		return(NULL);
+	word_count = count_words(s);
+	result = (char **)malloc(sizeof(char *) * (word_count + 1));
+	if (result == NULL)
+		return (NULL);
+	return (words_split(result, s, word_count));
 }

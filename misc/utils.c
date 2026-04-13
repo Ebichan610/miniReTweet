@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yebi <yebi@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:23:48 by ebichan           #+#    #+#             */
-/*   Updated: 2026/04/13 18:30:40 by yebi             ###   ########.fr       */
+/*   Updated: 2026/04/13 19:02:30 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,10 @@ bool	is_zero_vector(t_vector vector)
 	if (vector.vx == 0 && vector.vy == 0 && vector.vz == 0)
 		return (true);
 	return (false);
+}
+
+bool	ft_isspace(char c)
+{
+	return (c == ' ' || c == '\t' || c == '\n'
+		|| c == '\r' || c == '\f' || c == '\v');
 }
