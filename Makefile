@@ -3,18 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yebi <yebi@student.42tokyo.jp>             +#+  +:+       +#+         #
+#    By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/20 15:07:09 by ebichan           #+#    #+#              #
-#    Updated: 2026/04/13 18:37:19 by yebi             ###   ########.fr        #
+#    Updated: 2026/04/16 12:43:19 by ebichan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
 
-# MLX_FLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit -lm
-MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit -lm
+# MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
 INCLUDES    = -I. -Ilibft -Iminilibx
 
@@ -26,30 +26,30 @@ MLX         = $(MLX_DIR)/libmlx.a
 
 NAME = miniRT
 
-SRCS =	misc/error.c\
-	misc/free_elem.c\
-	misc/free.c\
-	misc/ft_atof.c\
-	misc/ft_split_space.c\
-	misc/utils.c\
-	parse/apply.c\
-	parse/get_next_line.c\
-	parse/in_range.c\
-	parse/parse1.c\
-	parse/parse2.c\
-	parse/read_file.c\
-	raytracing/color_calc.c\
-	raytracing/drawing_picture.c\
-	raytracing/lighting.c\
-	raytracing/ray.c\
-	raytracing/shadow.c\
-	raytracing/vec_calc.c\
-	raytracing/hit_object/hit_cylinder.c\
-	raytracing/hit_object/hit_plane.c\
-	raytracing/hit_object/hit_sphere.c\
-	init.c\
-	main.c\
-	mlx_hook.c
+SRCS =	src/misc/error.c\
+	src/misc/free_elem.c\
+	src/misc/free.c\
+	src/misc/ft_atof.c\
+	src/misc/ft_split_space.c\
+	src/misc/utils.c\
+	src/parse/apply.c\
+	src/parse/get_next_line.c\
+	src/parse/in_range.c\
+	src/parse/parse1.c\
+	src/parse/parse2.c\
+	src/parse/read_file.c\
+	src/raytracing/color_calc.c\
+	src/raytracing/drawing_picture.c\
+	src/raytracing/lighting.c\
+	src/raytracing/ray.c\
+	src/raytracing/shadow.c\
+	src/raytracing/vec_calc.c\
+	src/raytracing/hit_object/hit_cylinder.c\
+	src/raytracing/hit_object/hit_plane.c\
+	src/raytracing/hit_object/hit_sphere.c\
+	src/init.c\
+	src/main.c\
+	src/mlx_hook.c
 		
 OBJS = $(SRCS:%.c=%.o)
 

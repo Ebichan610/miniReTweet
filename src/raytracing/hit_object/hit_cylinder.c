@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit_cylinder.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yebi <yebi@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 18:31:14 by yebi              #+#    #+#             */
-/*   Updated: 2026/04/13 18:31:16 by yebi             ###   ########.fr       */
+/*   Updated: 2026/04/16 12:36:53 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,16 @@ static t_vector	get_side_normal(t_point hit_point, t_cylinder *cylinder)
 	return (vec_normalize(vec_sub(cp, proj)));
 }
 
+static t_vector get_cap_normal(t_ray ray, t_cylinder *cylinder)
+{
+	t_vector normal;
+
+	normal = vec_normalize(cylinder->vector);
+	if(vec_dot(ray.dir, normal) > 0)
+		normal = vec_mul(normal, -1.0);
+	return(normal);
+}
+
 static double	get_best_cap(t_ray ray, t_cylinder *cylinder)
 {
 	double	tb;
@@ -89,9 +99,9 @@ static double	get_best_cap(t_ray ray, t_cylinder *cylinder)
 
 	tb = hit_cap(ray, cylinder, true);
 	tt = hit_cap(ray, cylinder, false);
-	if (tb > 0.0 && (tt < 0.0 || tb < tt))
+	if (tb > 1e-6 && (tt < 1e-6 || tb < tt))
 		return (tb);
-	if (tt > 0.0)
+	if (tt > 1e-6)
 		return (tt);
 	return (-1.0);
 }
@@ -116,11 +126,11 @@ t_hit	hit_cylinder(t_ray ray, t_cylinder *cylinder)
 
 	hit.hit = false;
 	side = hit_side(ray, cylinder);
-	if (side > 0.0 && check_height(ray, cylinder, side))
+	if (side > 1e-6 && check_height(ray, cylinder, side))
 		hit = make_hit(ray, cylinder->color, side, get_side_normal(ray_at(ray,
 						side), cylinder));
 	cap = get_best_cap(ray, cylinder);
-	if (cap > 0.0 && (!hit.hit || cap < hit.t))
-		hit = make_hit(ray, cylinder->color, cap, cylinder->vector);
+	if (cap > 1e-6 && (!hit.hit || cap < hit.t))
+		hit = make_hit(ray, cylinder->color, cap, get_cap_normal(ray, cylinder));
 	return (hit);
 }
