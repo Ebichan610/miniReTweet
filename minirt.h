@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yebi <yebi@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:46:28 by ebichan           #+#    #+#             */
-/*   Updated: 2026/04/13 19:07:29 by yebi             ###   ########.fr       */
+/*   Updated: 2026/04/24 01:48:54 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@
 #  define BUFFER_SIZE 42
 # endif
 
-# define WIN_WIDTH 800
-# define WIN_HEIGHT 600
+# define WIN_WIDTH 1200
+# define WIN_HEIGHT 800
+# define EPSILON 1e-3
 
 typedef enum
 {
@@ -193,12 +194,12 @@ int						color_to_int(t_color c);
 void					my_pixel_put(t_minirt *minirt, int x, int y, int color);
 void					drawing_picture(t_minirt *minirt);
 t_color					calc_lighting(t_minirt *minirt, t_hit hit);
-void					get_camera_axes(t_camera *camera, t_vector *right,
-							t_vector *up);
-double					x_pixel_normalize(t_camera *camera, int x);
-double					y_pixel_normalize(t_camera *camera, int y);
-t_vector				get_ray_dir(t_camera *camera, t_vector u_right,
-							t_vector v_up);
+// void					get_camera_axes(t_camera *camera, t_vector *right,
+// 							t_vector *up);
+// double					x_pixel_normalize(t_camera *camera, int x);
+// double					y_pixel_normalize(t_camera *camera, int y);
+// t_vector				get_ray_dir(t_camera *camera, t_vector u_right,
+// 							t_vector v_up);
 t_ray					create_ray(t_minirt *minirt, int x, int y);
 bool					is_in_shadow(t_minirt *minirt, t_hit hit);
 t_vector				vec_add(t_vector a, t_vector b);

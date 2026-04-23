@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit_sphere.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yebi <yebi@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 18:31:37 by yebi              #+#    #+#             */
-/*   Updated: 2026/04/13 18:31:38 by yebi             ###   ########.fr       */
+/*   Updated: 2026/04/23 14:54:44 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ double	solve_quadratic(double a, double b, double disc)
 
 	t1 = (-b - sqrt(disc)) / (2.0 * a);
 	t2 = (-b + sqrt(disc)) / (2.0 * a);
-	if (t1 > 0.0)
+	if (t1 > EPSILON)
 		return (t1);
-	if (t2 > 0.0)
+	if (t2 > EPSILON)
 		return (t2);
 	return (-1.0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   apply.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yebi <yebi@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 01:43:56 by ebichan           #+#    #+#             */
-/*   Updated: 2026/04/13 18:30:49 by yebi             ###   ########.fr       */
+/*   Updated: 2026/04/23 14:44:54 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_vector	apply_vector(char *str)
 	vector.vy = ft_atof(strs[1]);
 	vector.vz = ft_atof(strs[2]);
 	free_strs(strs);
-	return (vector);
+	return (vec_normalize(vector));
 }
 
 t_color	apply_color(char *str)

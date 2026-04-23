@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit_plane.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yebi <yebi@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 18:31:26 by yebi              #+#    #+#             */
-/*   Updated: 2026/04/13 18:31:28 by yebi             ###   ########.fr       */
+/*   Updated: 2026/04/23 14:54:34 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ t_hit	hit_plane(t_ray ray, t_plane *plane)
 
 	hit.hit = false;
 	denom = vec_dot(ray.dir, plane->vector);
-	if (fabs(denom) < 1e-6)
+	if (fabs(denom) < EPSILON)
 		return (hit);
 	oc = vec_sub_point(plane->point, ray.origin);
 	t = vec_dot(oc, plane->vector) / denom;
-	if (t < 1e-6)
+	if (t < EPSILON)
 		return (hit);
 	hit.hit = true;
 	hit.t = t;

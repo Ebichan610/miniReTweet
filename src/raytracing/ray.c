@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yebi <yebi@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 18:32:12 by yebi              #+#    #+#             */
-/*   Updated: 2026/04/13 18:32:13 by yebi             ###   ########.fr       */
+/*   Updated: 2026/04/16 14:39:50 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	get_camera_axes(t_camera *camera, t_vector *right, t_vector *up)
+static void	get_camera_axes(t_camera *camera, t_vector *right, t_vector *up)
 {
 	t_vector	forward;
 	t_vector	world_up;
@@ -25,7 +25,7 @@ void	get_camera_axes(t_camera *camera, t_vector *right, t_vector *up)
 	*up = vec_cross(*right, forward);
 }
 
-double	x_pixel_normalize(t_camera *camera, int x)
+static double	x_pixel_normalize(t_camera *camera, int x)
 {
 	double	aspect;
 	double	scale;
@@ -37,7 +37,7 @@ double	x_pixel_normalize(t_camera *camera, int x)
 	return (u);
 }
 
-double	y_pixel_normalize(t_camera *camera, int y)
+static double	y_pixel_normalize(t_camera *camera, int y)
 {
 	double	scale;
 	double	v;
@@ -47,7 +47,7 @@ double	y_pixel_normalize(t_camera *camera, int y)
 	return (v);
 }
 
-t_vector	get_ray_dir(t_camera *camera, t_vector u_right, t_vector v_up)
+static t_vector	get_ray_dir(t_camera *camera, t_vector u_right, t_vector v_up)
 {
 	t_vector	dir;
 	t_vector	forward;
