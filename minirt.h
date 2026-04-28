@@ -6,7 +6,7 @@
 /*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:46:28 by ebichan           #+#    #+#             */
-/*   Updated: 2026/04/28 17:20:02 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/04/28 20:19:56 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,14 @@ typedef struct s_hit
 	t_color				color;
 	bool				is_hit;
 }						t_hit;
+
+typedef struct s_quad
+{
+	double 				a;
+	double 				b;
+	double 				c;
+	double 				disc;
+}						t_quad;
 
 typedef struct s_amb
 {
@@ -180,12 +188,15 @@ bool					parse_sphere(t_elem *elem, char **strs);
 bool					parse_plane(t_elem *elem, char **strs);
 bool					parse_cylinder(t_elem *elem, char **strs);
 t_elem					*read_file(char *filename);
+double 					hit_cap(t_ray ray, t_cylinder *cylinder, bool top);
+double 					hit_side(t_ray ray, t_cylinder *cylinder);
 t_hit					hit_cylinder(t_ray ray, t_cylinder *cylinder);
 t_vector				get_plane_normal(t_ray ray, t_plane *plane);
 t_hit					hit_plane(t_ray ray, t_plane *plane);
-double					solve_quadratic(double a, double b, double disc);
+double					solve_quadratic(t_quad quad);
 t_point					ray_at(t_ray ray, double t);
-t_vector				get_sphere_normal(t_point hit_point, t_sphere *sphere);
+void 					update_closest_hit(t_hit *closest, t_hit hit);
+t_hit 					make_hit(t_ray ray, double t, t_vector normal, t_color color);
 t_hit					hit_sphere(t_ray ray, t_sphere *sphere);
 t_hit					hit_object(t_minirt *minirt, t_ray ray);
 void 					initialize_hit_structure(t_hit *hit);

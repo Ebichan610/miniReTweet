@@ -6,37 +6,26 @@
 /*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 18:31:37 by yebi              #+#    #+#             */
-/*   Updated: 2026/04/28 17:22:35 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/04/28 20:03:03 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-double	solve_quadratic(double a, double b, double disc)
+static t_quad calc_sphere_quad(t_ray ray, t_sphere *sphere)
 {
-	double	t1;
-	double	t2;
+	t_quad quad;
+	t_vector oc;
 
-	t1 = (-b - sqrt(disc)) / (2.0 * a);
-	t2 = (-b + sqrt(disc)) / (2.0 * a);
-	if (t1 > EPSILON)
-		return (t1);
-	if (t2 > EPSILON)
-		return (t2);
-	return (-1.0);
+	oc = vec_sub_point(ray.origin, sphere->point);
+	quad.a = vec_dot(ray.dir, ray.dir);
+	quad.b = 2.0 * vec_dot(oc, ray.dir);
+	quad.c =vec_dot(oc, oc) - sphere->r * sphere->r;
+	quad.disc = quad.b * quad.b - 4.0 * quad.a * quad.c;
+	return(quad);
 }
 
-t_point	ray_at(t_ray ray, double t)
-{
-	t_point	p;
-
-	p.x = ray.origin.x + t * ray.dir.vx;
-	p.y = ray.origin.y + t * ray.dir.vy;
-	p.z = ray.origin.z + t * ray.dir.vz;
-	return (p);
-}
-
-t_vector	get_sphere_normal(t_point hit_point, t_sphere *sphere)
+static t_vector	get_sphere_normal(t_point hit_point, t_sphere *sphere)
 {
 	t_vector	normal;
 
@@ -46,24 +35,37 @@ t_vector	get_sphere_normal(t_point hit_point, t_sphere *sphere)
 	return (vec_normalize(normal));
 }
 
+double	solve_quadratic(t_quad quad)
+{
+	double	t1;
+	double	t2;
+	double sqrt_disc;
+	double t_min;
+	
+	sqrt_disc = sqrt(quad.disc);
+	t1 = (-quad.b - sqrt_disc) / (2.0 * quad.a);
+	t2 = (-quad.b + sqrt_disc) / (2.0 * quad.a);
+	t_min = -1.0;
+	if(t1 > EPSILON)
+		t_min = t1;
+	if (t2 > EPSILON)
+	{
+		if(t_min < 0 || t2 < t_min)
+			t_min = t2;
+	}
+	return (t_min);
+}
+
 t_hit	hit_sphere(t_ray ray, t_sphere *sphere)
 {
-	t_vector	oc;
-	double		a;
-	double		b;
-	double		c;
-	double		disc;
 	t_hit		hit;
+	t_quad		quad;
 
-	hit.is_hit = false;
-	oc = vec_sub_point(ray.origin, sphere->point);
-	a = vec_dot(ray.dir, ray.dir);
-	b = 2.0 * vec_dot(oc, ray.dir);
-	c =	(vec_dot(oc, oc) - sphere->r * sphere->r);
-	disc = b * b - 4.0 * a * c;
-	if (disc < 0)
+	initialize_hit_structure(&hit);
+	quad = calc_sphere_quad(ray, sphere);
+	if (quad.disc < 0)
 		return (hit);
-	hit.t = solve_quadratic(a, b, disc);
+	hit.t = solve_quadratic(quad);
 	if (hit.t < 0)
 		return (hit);
 	hit.is_hit = true;

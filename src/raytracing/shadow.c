@@ -6,7 +6,7 @@
 /*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 18:32:18 by yebi              #+#    #+#             */
-/*   Updated: 2026/04/28 17:24:11 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/04/28 20:23:57 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ static t_ray	make_shadow_ray(t_hit hit, t_point light_pos)
 	t_vector	bias;
 
 	bias = vec_mul(hit.normal, 0.001);
-	shadow_ray.origin.x = hit.point.x + bias.vx;
-	shadow_ray.origin.y = hit.point.y + bias.vy;
-	shadow_ray.origin.z = hit.point.z + bias.vz;
+	shadow_ray.origin = vec_add_point(hit.point, bias);
 	shadow_ray.dir = vec_normalize(vec_sub_point(light_pos, shadow_ray.origin));
 	return (shadow_ray);
 }
