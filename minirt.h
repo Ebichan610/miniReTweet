@@ -6,7 +6,7 @@
 /*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:46:28 by ebichan           #+#    #+#             */
-/*   Updated: 2026/04/24 01:48:54 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/04/27 01:37:50 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,7 @@ double					solve_quadratic(double a, double b, double disc);
 t_point					ray_at(t_ray ray, double t);
 t_vector				get_sphere_normal(t_point hit_point, t_sphere *sphere);
 t_hit					hit_sphere(t_ray ray, t_sphere *sphere);
+t_hit					hit_object(t_minirt *minirt, t_ray ray);
 t_color					color_add(t_color a, t_color b);
 t_color					color_mul(t_color c, double t);
 t_color					color_mul_color(t_color a, t_color b);
@@ -194,12 +195,6 @@ int						color_to_int(t_color c);
 void					my_pixel_put(t_minirt *minirt, int x, int y, int color);
 void					drawing_picture(t_minirt *minirt);
 t_color					calc_lighting(t_minirt *minirt, t_hit hit);
-// void					get_camera_axes(t_camera *camera, t_vector *right,
-// 							t_vector *up);
-// double					x_pixel_normalize(t_camera *camera, int x);
-// double					y_pixel_normalize(t_camera *camera, int y);
-// t_vector				get_ray_dir(t_camera *camera, t_vector u_right,
-// 							t_vector v_up);
 t_ray					create_ray(t_minirt *minirt, int x, int y);
 bool					is_in_shadow(t_minirt *minirt, t_hit hit);
 t_vector				vec_add(t_vector a, t_vector b);
@@ -209,6 +204,8 @@ double					vec_dot(t_vector a, t_vector b);
 t_vector				vec_cross(t_vector a, t_vector b);
 t_vector				vec_normalize(t_vector a);
 t_vector				vec_sub_point(t_point a, t_point b);
+t_point					vec_add_point(t_point p, t_vector a);
+t_point					vec_sub_point_vec(t_point p, t_vector a);
 t_minirt				*init_minirt(char *filename);
 void					setup_hooks(t_minirt *minirt);
 

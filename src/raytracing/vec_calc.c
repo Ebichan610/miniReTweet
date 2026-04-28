@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vec_calc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yebi <yebi@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 18:32:23 by yebi              #+#    #+#             */
-/*   Updated: 2026/04/13 18:32:24 by yebi             ###   ########.fr       */
+/*   Updated: 2026/04/26 00:20:07 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,25 @@ t_vector	vec_sub_point(t_point a, t_point b)
 	v.vx = a.x - b.x;
 	v.vy = a.y - b.y;
 	v.vz = a.z - b.z;
+	return (v);
+}
+
+t_point	vec_add_point(t_point p, t_vector a)
+{
+	t_point	v;
+
+	v.x = p.x + a.vx;
+	v.y = p.y + a.vy;
+	v.z = p.z + a.vz;
+	return (v);
+}
+
+t_point	vec_sub_point_vec(t_point p, t_vector a)
+{
+	t_point	v;
+
+	v.x = p.x - a.vx;
+	v.y = p.y - a.vy;
+	v.z = p.z - a.vz;
 	return (v);
 }

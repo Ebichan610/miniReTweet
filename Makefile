@@ -6,7 +6,7 @@
 #    By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/20 15:07:09 by ebichan           #+#    #+#              #
-#    Updated: 2026/04/16 12:43:19 by ebichan          ###   ########.fr        #
+#    Updated: 2026/04/27 01:33:56 by ebichan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRCS =	src/misc/error.c\
 	src/raytracing/hit_object/hit_cylinder.c\
 	src/raytracing/hit_object/hit_plane.c\
 	src/raytracing/hit_object/hit_sphere.c\
+	src/raytracing/hit_object/hit_object.c\
 	src/init.c\
 	src/main.c\
 	src/mlx_hook.c
