@@ -6,15 +6,12 @@
 /*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 18:31:14 by yebi              #+#    #+#             */
-/*   Updated: 2026/04/27 01:47:38 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/04/28 17:21:32 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-/*
-** 高さチェック（cylinder->point を中心として ±h/2 の範囲）
-*/
 static bool	check_height(t_ray ray, t_cylinder *cylinder, double t)
 {
 	t_point		hit_point;
@@ -27,10 +24,6 @@ static bool	check_height(t_ray ray, t_cylinder *cylinder, double t)
 	return (h >= -cylinder->h / 2.0 && h <= cylinder->h / 2.0);
 }
 
-/*
-** 側面の交差判定
-** t1・t2両方をチェックし、有効な最近傍を返す
-*/
 static double	hit_side(t_ray ray, t_cylinder *cylinder)
 {
 	t_vector	oc;
@@ -78,11 +71,6 @@ static double	hit_side(t_ray ray, t_cylinder *cylinder)
 	return (t_min);
 }
 
-/*
-** キャップ（円盤）との交差
-** top=true  → 上面（中心 + h/2 方向）
-** top=false → 下面（中心 - h/2 方向）
-*/
 static double	hit_cap(t_ray ray, t_cylinder *cylinder, bool top)
 {
 	t_point		cap_center;
@@ -110,10 +98,6 @@ static double	hit_cap(t_ray ray, t_cylinder *cylinder, bool top)
 	return (t);
 }
 
-/*
-** 側面の法線
-** 軸方向成分を除いた外向きベクトル
-*/
 static t_vector	get_side_normal(t_point hit_point, t_cylinder *cylinder)
 {
 	t_vector	cp;
@@ -124,12 +108,6 @@ static t_vector	get_side_normal(t_point hit_point, t_cylinder *cylinder)
 	return (vec_normalize(vec_sub(cp, proj)));
 }
 
-/*
-** キャップの法線
-** top=true  → 軸方向（上向き）
-** top=false → 軸と逆方向（下向き）
-** レイと同じ向きなら反転（両面対応）
-*/
 static t_vector	get_cap_normal(t_ray ray, t_cylinder *cylinder, bool top)
 {
 	t_vector	normal;
@@ -143,21 +121,16 @@ static t_vector	get_cap_normal(t_ray ray, t_cylinder *cylinder, bool top)
 	return (vec_normalize(normal));
 }
 
-/*
-** 円柱との交差判定メイン
-** 側面→下面→上面の順に判定し、最も近いtを採用する
-*/
 t_hit	hit_cylinder(t_ray ray, t_cylinder *cylinder)
 {
 	t_hit	hit;
 	double	t;
 
-	hit.hit = false;
-	hit.t = 1e9;
+	initialize_hit_structure(&hit);
 	t = hit_side(ray, cylinder);
 	if (t > EPSILON && t < hit.t)
 	{
-		hit.hit = true;
+		hit.is_hit = true;
 		hit.t = t;
 		hit.point = ray_at(ray, t);
 		hit.normal = get_side_normal(hit.point, cylinder);
@@ -166,7 +139,7 @@ t_hit	hit_cylinder(t_ray ray, t_cylinder *cylinder)
 	t = hit_cap(ray, cylinder, false);
 	if (t > EPSILON && t < hit.t)
 	{
-		hit.hit = true;
+		hit.is_hit = true;
 		hit.t = t;
 		hit.point = ray_at(ray, t);
 		hit.normal = get_cap_normal(ray, cylinder, false);
@@ -175,7 +148,7 @@ t_hit	hit_cylinder(t_ray ray, t_cylinder *cylinder)
 	t = hit_cap(ray, cylinder, true);
 	if (t > EPSILON && t < hit.t)
 	{
-		hit.hit = true;
+		hit.is_hit = true;
 		hit.t = t;
 		hit.point = ray_at(ray, t);
 		hit.normal = get_cap_normal(ray, cylinder, true);

@@ -6,7 +6,7 @@
 /*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 18:31:58 by yebi              #+#    #+#             */
-/*   Updated: 2026/04/27 01:32:30 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/04/28 17:23:43 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	drawing_picture(t_minirt *minirt)
 		{
 			ray = create_ray(minirt, x, y);
 			hit = hit_object(minirt, ray);
-			if (hit.hit)
+			if (hit.is_hit)
 				my_pixel_put(minirt, x, y, color_to_int(calc_lighting(minirt,
 							hit)));
 			else

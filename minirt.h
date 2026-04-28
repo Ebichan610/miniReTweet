@@ -6,7 +6,7 @@
 /*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:46:28 by ebichan           #+#    #+#             */
-/*   Updated: 2026/04/27 01:37:50 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/04/28 17:20:02 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef struct s_hit
 	t_point				point;
 	t_vector			normal;
 	t_color				color;
-	bool				hit;
+	bool				is_hit;
 }						t_hit;
 
 typedef struct s_amb
@@ -188,6 +188,7 @@ t_point					ray_at(t_ray ray, double t);
 t_vector				get_sphere_normal(t_point hit_point, t_sphere *sphere);
 t_hit					hit_sphere(t_ray ray, t_sphere *sphere);
 t_hit					hit_object(t_minirt *minirt, t_ray ray);
+void 					initialize_hit_structure(t_hit *hit);
 t_color					color_add(t_color a, t_color b);
 t_color					color_mul(t_color c, double t);
 t_color					color_mul_color(t_color a, t_color b);

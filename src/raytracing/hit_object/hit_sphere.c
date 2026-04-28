@@ -6,7 +6,7 @@
 /*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 18:31:37 by yebi              #+#    #+#             */
-/*   Updated: 2026/04/23 14:54:44 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/04/28 17:22:35 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,22 @@ t_hit	hit_sphere(t_ray ray, t_sphere *sphere)
 	t_vector	oc;
 	double		a;
 	double		b;
+	double		c;
 	double		disc;
 	t_hit		hit;
 
-	hit.hit = false;
+	hit.is_hit = false;
 	oc = vec_sub_point(ray.origin, sphere->point);
 	a = vec_dot(ray.dir, ray.dir);
 	b = 2.0 * vec_dot(oc, ray.dir);
-	disc = b * b - 4.0 * a * (vec_dot(oc, oc) - sphere->r * sphere->r);
+	c =	(vec_dot(oc, oc) - sphere->r * sphere->r);
+	disc = b * b - 4.0 * a * c;
 	if (disc < 0)
 		return (hit);
 	hit.t = solve_quadratic(a, b, disc);
 	if (hit.t < 0)
 		return (hit);
-	hit.hit = true;
+	hit.is_hit = true;
 	hit.point = ray_at(ray, hit.t);
 	hit.normal = get_sphere_normal(hit.point, sphere);
 	hit.color = sphere->color;

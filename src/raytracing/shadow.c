@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shadow.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yebi <yebi@student.42tokyo.jp>             +#+  +:+       +#+        */
+/*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 18:32:18 by yebi              #+#    #+#             */
-/*   Updated: 2026/04/13 18:32:18 by yebi             ###   ########.fr       */
+/*   Updated: 2026/04/28 17:24:11 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static bool	shadow_sphere(t_ray shadow_ray, t_sphere *sphere, double distance)
 	while (sphere)
 	{
 		hit = hit_sphere(shadow_ray, sphere);
-		if (hit.hit && hit.t < distance)
+		if (hit.is_hit && hit.t < distance)
 			return (true);
 		sphere = sphere->next;
 	}
@@ -54,7 +54,7 @@ static bool	shadow_plane(t_ray shadow_ray, t_plane *plane, double distance)
 	while (plane)
 	{
 		hit = hit_plane(shadow_ray, plane);
-		if (hit.hit && hit.t < distance)
+		if (hit.is_hit && hit.t < distance)
 			return (true);
 		plane = plane->next;
 	}
@@ -69,7 +69,7 @@ static bool	shadow_cylinder(t_ray shadow_ray, t_cylinder *cylinder,
 	while (cylinder)
 	{
 		hit = hit_cylinder(shadow_ray, cylinder);
-		if (hit.hit && hit.t < distance)
+		if (hit.is_hit && hit.t < distance)
 			return (true);
 		cylinder = cylinder->next;
 	}

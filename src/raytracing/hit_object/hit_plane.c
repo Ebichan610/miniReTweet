@@ -6,7 +6,7 @@
 /*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 18:31:26 by yebi              #+#    #+#             */
-/*   Updated: 2026/04/23 14:54:34 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/04/28 17:21:57 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_hit	hit_plane(t_ray ray, t_plane *plane)
 	double		t;
 	t_hit		hit;
 
-	hit.hit = false;
+	hit.is_hit = false;
 	denom = vec_dot(ray.dir, plane->vector);
 	if (fabs(denom) < EPSILON)
 		return (hit);
@@ -37,7 +37,7 @@ t_hit	hit_plane(t_ray ray, t_plane *plane)
 	t = vec_dot(oc, plane->vector) / denom;
 	if (t < EPSILON)
 		return (hit);
-	hit.hit = true;
+	hit.is_hit = true;
 	hit.t = t;
 	hit.point = ray_at(ray, t);
 	hit.normal = get_plane_normal(ray, plane);

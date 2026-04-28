@@ -6,7 +6,7 @@
 /*   By: ebichan <ebichan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 01:32:42 by ebichan           #+#    #+#             */
-/*   Updated: 2026/04/27 01:32:51 by ebichan          ###   ########.fr       */
+/*   Updated: 2026/04/28 17:21:13 by ebichan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,12 @@ t_hit	hit_object(t_minirt *minirt, t_ray ray)
 	t_plane		*plane;
 	t_cylinder	*cylinder;
 
-	closest.hit = false;
-	closest.t = 1e9;
+	initialize_hit_structure(&closest);
 	sphere = minirt->elem->sphere;
 	while (sphere)
 	{
 		hit = hit_sphere(ray, sphere);
-		if (hit.hit && (!closest.hit || hit.t < closest.t))
+		if (hit.is_hit && (!closest.is_hit || hit.t < closest.t))
 			closest = hit;
 		sphere = sphere->next;
 	}
@@ -34,7 +33,7 @@ t_hit	hit_object(t_minirt *minirt, t_ray ray)
 	while (plane)
 	{
 		hit = hit_plane(ray, plane);
-		if (hit.hit && (!closest.hit || hit.t < closest.t))
+		if (hit.is_hit && (!closest.is_hit || hit.t < closest.t))
 			closest = hit;
 		plane = plane->next;
 	}
@@ -42,7 +41,7 @@ t_hit	hit_object(t_minirt *minirt, t_ray ray)
 	while (cylinder)
 	{
 		hit = hit_cylinder(ray, cylinder);
-		if (hit.hit && (!closest.hit || hit.t < closest.t))
+		if (hit.is_hit && (!closest.is_hit || hit.t < closest.t))
 			closest = hit;
 		cylinder = cylinder->next;
 	}
